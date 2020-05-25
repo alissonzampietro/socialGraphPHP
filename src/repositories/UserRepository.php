@@ -16,7 +16,7 @@ class UserRepository {
     public function getAll() {
         $query = $this->instance->query('SELECT id, firstname, surname, age, gender FROM users');
         $query->execute();
-        return $this->attach($query->fetchAll(PDO::FETCH_ASSOC));
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function get($id) {
