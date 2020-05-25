@@ -7,8 +7,13 @@ use Core\Http;
 use Core\Request;
 
 class GraphController {
-    public function get(Request $req) {
+    public function getAll(Request $request) {
         $rep = new UserRepository();
-        Http::success($rep->getAllUser());
+        Http::success($rep->getAll());
+    }
+
+    public function get(Request $request) {
+        $rep = new UserRepository();
+        Http::success($rep->get($request->url('id')));
     }
 }
