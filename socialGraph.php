@@ -184,31 +184,3 @@ $socialData = array(
 		'cities' => array('Dublin' => 90, 'London' => 90)
 	)
 );
-
-$cities = $pdo->prepare("INSERT INTO cities(name) VALUES(?)");
-$getCity = $pdo->prepare("SELECT id FROM cities WHERE name = ?");
-$users_cities = $pdo->prepare("INSERT INTO users_cities(user_id, city_id, percentual) VALUES(?, ?, ?)");
-$pdo->beginTransaction();
-try {
-	foreach($socialData as $data) {
-		foreach($data['cities'] as $city => $percentual) {
-			$getCity->execute([$city]);
-			$result = $getCity->fetch();
-
-			if(!$result) {
-				$cities->execute([$city]);
-				$id = $pdo->lastInsertId();
-			}else {
-				$id = $result['id'];
-			}
-
-			$a = $users_cities->execute([$data['id'], $id, $percentual]);
-			var_dump('users_cities: ',$a);
-		}
-		
-	}
-	$pdo->commit();
-}catch(Exception $e) {
-	var_dump($e->getMessage());
-	exit;
-}
