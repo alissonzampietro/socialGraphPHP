@@ -1,7 +1,5 @@
 <?php
 
-$pdo = new PDO('sqlite:'.__DIR__.'/storage/database.sqlite3');
-
 $socialData = array(
 	 array(
 		'id' => 1,

@@ -16,4 +16,9 @@ class GraphController {
         $rep = new UserRepository();
         Http::success($rep->get($request->url('id')));
     }
+
+    public function graph(Request $request) {
+        $rep = new UserRepository();
+        Http::success($rep->graph());
+    }
 }
